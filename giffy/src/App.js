@@ -1,26 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import './App.css';
-import getGifs from './services/getGifs';
+import React from "react";
+import "./App.css";
+import ListOfGifs from "./components/ListOfGifs";
+import { Route } from "wouter"
 
-
-function App() {
-  //useState: devuelve una array de 2 posiciones
-  const [gifs, setGifs] = useState([]) 
-
-  //useEffect: permite ejecutar una función de forma totalmente arbitraria. Se ejecutará cada vez que se renderiza el componente
-  useEffect(function() {
-    getGifs({keyword: 'rick'}).then(gifs => setGifs(gifs))
-  }, [])
+export default function App() {
   return (
     <div className="App">
       <section className="App-content">
-        {
-          gifs.map(singleGifs => <img src={singleGifs}/>)
-        }
-
+        <h1>App</h1>
+        <a href='/gif/cat'>Gif de Gatos</a>
+        <Route 
+          component={ListOfGifs} 
+          path="/gif/:keyword"/>
+        {/* <ListOfGifs keyword="cat" /> */}
       </section>
     </div>
   );
 }
-
-export default App;
